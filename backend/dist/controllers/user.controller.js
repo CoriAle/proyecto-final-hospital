@@ -18,9 +18,9 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const config_1 = __importDefault(require("config"));
 const user_1 = __importDefault(require("../models/user"));
 const error_1 = require("../error");
-const router = express_1.Router();
 const auth_validator_1 = __importDefault(require("../middlewares/validators/auth/auth.validator"));
 const validator_1 = __importDefault(require("../middlewares/validator"));
+const router = express_1.Router();
 router.post('/', auth_validator_1.default, validator_1.default, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { name, email, password } = req.body;
     try {

@@ -5,11 +5,11 @@ import config from 'config';
 import User from '../models/user';
 import { ErrorHandler, handleError } from '../error';
 import auth_token from '../middlewares/auth/auth.midd';
+import bodyValidator from '../middlewares/validators/auth/auth.validator';
+import validationHandler  from '../middlewares/validator';
 
 const router = Router();
 
-import bodyValidator from '../middlewares/validators/auth/auth.validator';
-import validationHandler  from '../middlewares/validator';
 
 router.post(
 	'/', 

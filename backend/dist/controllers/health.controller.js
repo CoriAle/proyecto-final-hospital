@@ -8,7 +8,6 @@ const config_1 = __importDefault(require("config"));
 const port = config_1.default.get('port');
 const router = express_1.default.Router();
 router.get('/', (req, res) => {
-    console.log("hola");
     return res.status(200).json({
         server_up: true,
         port: port,
