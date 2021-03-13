@@ -13,12 +13,6 @@ const HospitalSchema = new mongoose_1.Schema({
     phone: {
         type: String,
     },
-    doctors: [
-        {
-            type: mongoose_1.Schema.Types.ObjectId,
-            ref: 'Doctor',
-        }
-    ],
 }, { timestamps: true });
-exports.default = mongoose_1.model('Doctor', HospitalSchema);
+exports.default = mongoose_1.model('Hospital', HospitalSchema);
 //# sourceMappingURL=hospital.js.map

@@ -14,28 +14,25 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const error_1 = require("../error");
-const doctor_1 = __importDefault(require("../models/doctor"));
-const post_validator_1 = __importDefault(require("../middlewares/validators/doctor/post.validator"));
-const put_validator_1 = __importDefault(require("../middlewares/validators/doctor/put.validator"));
+const hospital_1 = __importDefault(require("../models/hospital"));
+const post_validator_1 = __importDefault(require("../middlewares/validators/hospital/post.validator"));
+const put_validator_1 = __importDefault(require("../middlewares/validators/hospital/put.validator"));
 const validator_1 = __importDefault(require("../middlewares/validator"));
 const router = express_1.Router();
 router.post('/', 
 //auth_token, 
 post_validator_1.default, validator_1.default, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { name, email, phone, speciality, adress, hospitals, } = req.body;
-        const newDoctor = new doctor_1.default({
+        const { name, phone, adress, } = req.body;
+        const newHospital = new hospital_1.default({
             name,
-            email,
             phone,
-            speciality,
             adress,
-            hospitals,
         });
-        const doctor = yield newDoctor.save();
+        const hospital = yield newHospital.save();
         return res.status(201).json({
-            data: doctor,
-            msj: 'Doctor created!',
+            data: hospital,
+            msj: 'Hospital created!',
         });
     }
     catch (err) {
@@ -48,27 +45,23 @@ router.put('/:id',
 //auth_token, 
 put_validator_1.default, validator_1.default, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { name, email, phone, speciality, adress, hospitals, } = req.body;
-        const doctorFields = {};
+        const { name, phone, adress, } = req.body;
+        const hospitalFields = {};
         if (name)
-            doctorFields.name = name;
-        if (email)
-            doctorFields.email = email;
+            hospitalFields.name = name;
         if (phone)
-            doctorFields.phone = phone;
-        if (speciality)
-            doctorFields.speciality = speciality;
+            hospitalFields.phone = phone;
         if (adress)
-            doctorFields.adress = adress;
-        let doctor = yield doctor_1.default.findById(req.params.id);
-        if (!doctor) {
-            const custom = new error_1.ErrorHandler(404, 'Doctor not found.');
+            hospitalFields.adress = adress;
+        let hospital = yield hospital_1.default.findById(req.params.id);
+        if (!hospital) {
+            const custom = new error_1.ErrorHandler(404, 'Hospital not found.');
             error_1.handleError(custom, req, res);
         }
-        doctor = yield doctor_1.default.findByIdAndUpdate(req.params.id, { $set: doctorFields, $addToSet: { hospitals: { $each: hospitals } } }, { new: true });
+        hospital = yield hospital_1.default.findByIdAndUpdate(req.params.id, { $set: hospitalFields }, { new: true });
         return res.status(200).json({
-            data: doctor,
-            msj: 'Doctor updated!',
+            data: hospital,
+            msj: 'Hospital updated!',
         });
     }
     catch (err) {
@@ -81,10 +74,10 @@ router.get('/',
 // auth_token,
 (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const doctors = yield doctor_1.default.find({}).populate('hospitals').sort('-createdAt');
+        const hospitals = yield hospital_1.default.find({}).sort('-createdAt');
         return res.status(200).json({
-            data: doctors,
-            msj: 'List of doctors',
+            data: hospitals,
+            msj: 'List of hospitals',
         });
     }
     catch (err) {
@@ -98,15 +91,15 @@ router.delete('/:id',
 (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const id = req.params.id;
-        const doctor = yield doctor_1.default.findById(id);
-        if (!doctor) {
-            const custom = new error_1.ErrorHandler(404, 'Doctor not found.');
+        const hospital = yield hospital_1.default.findById(id);
+        if (!hospital) {
+            const custom = new error_1.ErrorHandler(404, 'Hospital not found.');
             error_1.handleError(custom, req, res);
         }
-        yield doctor_1.default.findByIdAndRemove(id);
+        yield hospital_1.default.findByIdAndRemove(id);
         return res.status(200).json({
-            data: doctor,
-            msj: 'Doctor Removed',
+            data: hospital,
+            msj: 'Hospital Removed',
         });
     }
     catch (err) {
@@ -116,5 +109,4 @@ router.delete('/:id',
     }
 }));
 exports.default = router;
-//https://stackoverflow.com/questions/46019149/many-to-many-with-mongoose
-//# sourceMappingURL=doctor.controller.js.map
+//# sourceMappingURL=hospital.controller.js.map

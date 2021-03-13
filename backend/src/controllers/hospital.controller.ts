@@ -1,9 +1,9 @@
 import { Request, Response, Router } from 'express';
 import { ErrorHandler, handleError } from '../error';
 import auth_token from '../middlewares/auth/auth.midd';
-import Doctor from '../models/doctor';
-import postValidator from '../middlewares/validators/doctor/post.validator';
-import putValidator from '../middlewares/validators/doctor/put.validator';
+import Hospital from '../models/hospital';
+import postValidator from '../middlewares/validators/hospital/post.validator';
+import putValidator from '../middlewares/validators/hospital/put.validator';
 import validationHandler  from '../middlewares/validator';
 
 const router = Router();
@@ -18,27 +18,21 @@ router.post(
 		try {
 			const {
 				name,
-				email,
 				phone,
-				speciality,
 				adress,
-				hospitals,
 			} = req.body;
 
-			const newDoctor = new Doctor({
+			const newHospital = new Hospital({
 				name,
-				email,
 				phone,
-				speciality,
 				adress,
-				hospitals,
 			});
 
-			const doctor = await newDoctor.save();
+			const hospital = await newHospital.save();
 
 			return res.status(201).json({
-				data: doctor,
-				msj: 'Doctor created!',
+				data: hospital,
+				msj: 'Hospital created!',
 			});
 
 		} catch(err) {
@@ -60,36 +54,32 @@ router.put(
 		try {
 			const {
 				name,
-				email,
 				phone,
-				speciality,
 				adress,
-				hospitals,
 			} = req.body;
-			const doctorFields:any ={};
+			const hospitalFields:any ={};
 
-			if(name) doctorFields.name = name;
-			if(email) doctorFields.email = email;
-			if(phone) doctorFields.phone = phone;
-			if(speciality) doctorFields.speciality = speciality;
-			if(adress) doctorFields.adress = adress;
+			if(name) hospitalFields.name = name;
+			if(phone) hospitalFields.phone = phone;
+			if(adress) hospitalFields.adress = adress;
 
-			let doctor = await Doctor.findById(req.params.id);
+			let hospital = await Hospital.findById(req.params.id);
 
-			if(!doctor) {
-				const custom = new ErrorHandler(404, 'Doctor not found.');
+			if(!hospital) {
+				const custom = new ErrorHandler(404, 'Hospital not found.');
 	    		handleError(custom, req, res);
 	    	}
 
-			 doctor = await Doctor.findByIdAndUpdate(
+
+			 hospital = await Hospital.findByIdAndUpdate(
 			 	req.params.id,
-			 	{ $set: doctorFields, $addToSet: { hospitals: { $each: hospitals } } },
+			 	{ $set: hospitalFields },
 			 	{ new: true },
 			);
 
 			return res.status(200).json({
-				data: doctor,
-				msj: 'Doctor updated!',
+				data: hospital,
+				msj: 'Hospital updated!',
 			});
 
 		} catch(err) {
@@ -106,11 +96,11 @@ router.get(
 	// auth_token,
 	async(req: Request, res:Response) => {
 		try {
-			const doctors = await Doctor.find({}).populate('hospitals').sort('-createdAt');
+			const hospitals = await Hospital.find({}).sort('-createdAt');
 
 			return res.status(200).json({
-				data: doctors,
-				msj: 'List of doctors',
+				data: hospitals,
+				msj: 'List of hospitals',
 			});
 		} catch(err) {
 			const custom = new ErrorHandler(500, 'Server Error.' + err._message );
@@ -127,16 +117,16 @@ router.delete(
 	async(req: Request, res:Response) => {
 		try {
 			const id = req.params.id;
-			const doctor = await Doctor.findById(id);
-			if(!doctor) {
-				const custom = new ErrorHandler(404, 'Doctor not found.');
+			const hospital = await Hospital.findById(id);
+			if(!hospital) {
+				const custom = new ErrorHandler(404, 'Hospital not found.');
 	    		handleError(custom, req, res);
 	    	}
 
-	    	await Doctor.findByIdAndRemove(id);
+	    	await Hospital.findByIdAndRemove(id);
 			return res.status(200).json({
-				data: doctor,
-				msj: 'Doctor Removed',
+				data: hospital,
+				msj: 'Hospital Removed',
 			});
 		} catch(err) {
 			const custom = new ErrorHandler(500, 'Server Error.' + err._message );
@@ -148,6 +138,3 @@ router.delete(
 );
 
 export default router;
-
-
-//https://stackoverflow.com/questions/46019149/many-to-many-with-mongoose
