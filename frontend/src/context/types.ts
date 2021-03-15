@@ -12,6 +12,7 @@ export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 export const SET_ALERT = 'SET_ALERT';
 export const REMOVE_ALERT = 'REMOVE_ALERT';
 export const HOSPITAL_ERROR = 'HOSPITAL_ERROR';
+export const DOCTOR_ERROR = 'DOCTOR_ERROR';
 
 
 // HOSPITAL TYPES
@@ -24,3 +25,14 @@ export const HOSPITAL_ERROR = 'HOSPITAL_ERROR';
  export const FILTER_HOSPITALS =  'FILTER_HOSPITALS';
  export const CLEAR_HOSPITALS =  'CLEAR_HOSPITALS';
  export const CLEAR_FILTER =  'CLEAR_FILTER';
+
+ // DOCTOR TYPES
+  export const GET_DOCTORS =  'GET_DOCTORS';
+  export const ADD_DOCTOR =  'ADD_DOCTOR';
+  export const DELETE_DOCTOR =  'DELETE_DOCTOR';
+  export const SET_CURRENT_DOCTOR =  'SET_CURRENT_DOCTOR';
+  export const CLEAR_CURRENT_DOCTOR =  'CLEAR_CURRENT_DOCTOR';
+  export const UPDATE_DOCTOR =  'UPDATE_DOCTOR';
+  export const FILTER_DOCTORS =  'FILTER_DOCTORS';
+  export const CLEAR_DOCTORS =  'CLEAR_DOCTORS';
+  export const CLEAR_FILTER_DOCTOR =  'CLEAR_FILTER_DOCTOR';

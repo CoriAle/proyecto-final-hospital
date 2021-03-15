@@ -73,7 +73,7 @@ const HospitalState = (props: PropsWithChildren<any>) => {
 
 		try {
 			const res = await g_instance.put(`/v1/hospital/${hospital._id}`, hospital);
-			dispatch({ type: UPDATE_HOSPITAL, payload: hospital._id });
+			dispatch({ type: UPDATE_HOSPITAL, payload: res.data });
 		} catch (err) {
 			dispatch({ type: HOSPITAL_ERROR, payload: err.response.msg });
 		}
