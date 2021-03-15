@@ -1,25 +1,43 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Fragment } from 'react';
+import { BrowserRouter as Router, Route, Switch}  from 'react-router-dom';
+import About from './components/pages/About';
+import Hospital from './components/pages/Hospital';
+import Doctor from './components/pages/Doctor';
+import Login from './components/auth/Login';
+import Register from './components/auth/Register';
+import Navbar from './components/layout/Navbar';
+import Alerts from './components/layout/Alerts';
+
+import  HospitalState from './context/hospital/hospitalState'
+
 import './App.css';
+
+if (localStorage.getItem('token')) {
+  console.log('This is the auth token');
+}
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <HospitalState>
+      <Router>
+        <Fragment>
+          <Navbar />
+         <section id="main-content">
+            <section className="wrapper site-min-height">
+              <Switch>
+
+                <Route exact path='/' component={About}/>
+                <Route exact path='/about' component={About}/>
+                <Route exact path='/hospital' component={Hospital}/>
+                <Route exact path='/doctor' component={Doctor}/>
+                <Route exact path='/login' component={Login} />
+                <Route exact path='/register' component={Register} />
+              </Switch>
+            </section>
+          </section>
+        </Fragment>
+      </Router>
+    </HospitalState>
   );
 }
 
