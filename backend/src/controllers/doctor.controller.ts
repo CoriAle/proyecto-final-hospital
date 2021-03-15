@@ -73,6 +73,7 @@ router.put(
 			if(phone) doctorFields.phone = phone;
 			if(speciality) doctorFields.speciality = speciality;
 			if(adress) doctorFields.adress = adress;
+			if(hospitals) doctorFields.hospitals = hospitals;
 
 			let doctor = await Doctor.findById(req.params.id);
 
@@ -83,9 +84,9 @@ router.put(
 
 			 doctor = await Doctor.findByIdAndUpdate(
 			 	req.params.id,
-			 	{ $set: doctorFields, $addToSet: { hospitals: { $each: hospitals } } },
+			 	{ $set: doctorFields },
 			 	{ new: true },
-			);
+			).populate('hospitals');
 
 			return res.status(200).json({
 				data: doctor,

@@ -1,11 +1,15 @@
 import React, { useState, useContext, useEffect } from 'react'
+import MultiSelect from "react-multi-select-component";
 import DoctorContext from '../../context/doctor/doctorContext';
+import HospitalContext from '../../context/hospital/hospitalContext';
 import { Doctor } from '../../models/doctor/doctor.model';
 import PropTypes from 'prop-types'
 
 const DoctorForm = () => {
 	const doctorContext = useContext(DoctorContext);
+	const hospitalContext = useContext(HospitalContext);
 	const { addDoctor, clearCurrent, updateDoctor, current } = doctorContext;
+	const { getHospitals, hospitals: selectHospitals } = hospitalContext;
 	
 	useEffect(() => {
 			if(current !== null) {
@@ -21,6 +25,16 @@ const DoctorForm = () => {
 		};
 	}, [doctorContext, current]);
 
+	useEffect(() => {
+		getHospitals();
+	}, []);
+
+	const hospitalOptions = selectHospitals ?
+		selectHospitals.map(hospital => {
+			return { value: hospital._id, label: hospital.name }
+		}) :
+		[];
+
 	const [doctor, setDoctor] = useState({
 		name: '',
 		email: '',
@@ -29,7 +43,13 @@ const DoctorForm = () => {
 		speciality: '',
 	} as Doctor);
 
-	const { name, email, phone, adress, speciality } = doctor;
+	const { name, email, phone, adress, speciality, hospitals } = doctor;
+
+	const selectedHospitals = hospitals ?
+		hospitals.map((item:any) => {
+			return  item._id ? { value: item._id, label: item.name } : item;
+		}) :
+		[];
 
 	const onChange = (e: React.ChangeEvent<HTMLInputElement>) =>
 		setDoctor({...doctor, [e.target.name]: e.target.value });
@@ -37,14 +57,24 @@ const DoctorForm = () => {
 	const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
+		const sendDoctor = {
+			...doctor, 
+			hospitals: doctor.hospitals ?
+				doctor.hospitals.map((item:any) => item.value ):
+				[],
+		}
+
 		if (current === null) {
-			addDoctor(doctor);
+			addDoctor(sendDoctor);
 		} else {
-			updateDoctor(doctor);
+			updateDoctor(sendDoctor);
 		}
 
 		clearAll();
 	};
+
+	const onChangeSelect = (selected: any) => 
+		setDoctor({...doctor, hospitals: selected });
 
 	const clearAll = () => clearCurrent();
 
@@ -118,7 +148,7 @@ const DoctorForm = () => {
 		    	</div>
 				</div>
 				<div className="form-group">
-		      <label className="col-sm-2 control-label col-lg-2" htmlFor="phone">
+		      <label className="col-sm-2  control-label col-lg-2" htmlFor="phone">
 		      	Speciality
 		      </label>
 		      <div className="col-lg-10">
@@ -130,6 +160,19 @@ const DoctorForm = () => {
 		        	value={speciality}
 		        	onChange={onChange}
 		        />
+		    	</div>
+				</div>
+				<div className="form-group">
+		      <p className="control-label col-lg-2" >
+		      	Hospitals
+		      </p>
+		      <div className="col-lg-10">
+		        <MultiSelect
+				        options={hospitalOptions}
+				        value={selectedHospitals}
+				        onChange={onChangeSelect}
+				        labelledBy={"Select"}
+				      />
 		    	</div>
 				</div>
 				

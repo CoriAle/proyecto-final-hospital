@@ -60,12 +60,14 @@ put_validator_1.default, validator_1.default, (req, res) => __awaiter(void 0, vo
             doctorFields.speciality = speciality;
         if (adress)
             doctorFields.adress = adress;
+        if (hospitals)
+            doctorFields.hospitals = hospitals;
         let doctor = yield doctor_1.default.findById(req.params.id);
         if (!doctor) {
             const custom = new error_1.ErrorHandler(404, 'Doctor not found.');
             error_1.handleError(custom, req, res);
         }
-        doctor = yield doctor_1.default.findByIdAndUpdate(req.params.id, { $set: doctorFields, $addToSet: { hospitals: { $each: hospitals } } }, { new: true });
+        doctor = yield doctor_1.default.findByIdAndUpdate(req.params.id, { $set: doctorFields }, { new: true }).populate('hospitals');
         return res.status(200).json({
             data: doctor,
             msj: 'Doctor updated!',
