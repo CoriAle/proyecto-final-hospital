@@ -15,7 +15,7 @@ import {
 	CLEAR_FILTER_DOCTOR,
 	DOCTOR_ERROR,
 } from '../types';
-//import setAuthToken from '../../utils/setAuthToken';
+import setAuthToken from '../../utils/setAuthToken';
 
 const DoctorState = (props: PropsWithChildren<any>) => {
 	const initialState: Doctors_State = {
@@ -30,8 +30,7 @@ const DoctorState = (props: PropsWithChildren<any>) => {
 
 	const checkAuthToken = () => {
 		if (localStorage.getItem('token')) {
-			console.log("Set auth token");
-			//setAuthToken(localStorage.getItem('token'));
+			setAuthToken(localStorage.getItem('token'));
 		}
 	};
 

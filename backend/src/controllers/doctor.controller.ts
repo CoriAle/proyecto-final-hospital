@@ -10,7 +10,7 @@ const router = Router();
 
 router.post(
 	'/',
-	//auth_token, 
+	auth_token, 
 	postValidator,
 	validationHandler,
 	async(req:Request, res: Response) => {
@@ -52,7 +52,7 @@ router.post(
 
 router.put(
 	'/:id',
-	//auth_token, 
+	auth_token, 
 	putValidator,
 	validationHandler,
 	async(req:Request, res: Response) => {
@@ -104,7 +104,7 @@ router.put(
 
 router.get(
 	'/',
-	// auth_token,
+	auth_token,
 	async(req: Request, res:Response) => {
 		try {
 			const doctors = await Doctor.find({}).populate('hospitals').sort('-createdAt');
@@ -124,7 +124,7 @@ router.get(
 
 router.delete(
 	'/:id',
-	// auth_token,
+	auth_token,
 	async(req: Request, res:Response) => {
 		try {
 			const id = req.params.id;

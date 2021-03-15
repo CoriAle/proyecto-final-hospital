@@ -15,7 +15,7 @@ import {
 	CLEAR_FILTER,
 	HOSPITAL_ERROR,
 } from '../types';
-//import setAuthToken from '../../utils/setAuthToken';
+import setAuthToken from '../../utils/setAuthToken';
 
 const HospitalState = (props: PropsWithChildren<any>) => {
 	const initialState: Hospitals_State = {
@@ -30,8 +30,7 @@ const HospitalState = (props: PropsWithChildren<any>) => {
 
 	const checkAuthToken = () => {
 		if (localStorage.getItem('token')) {
-			console.log("Set auth token");
-			//setAuthToken(localStorage.getItem('token'));
+			setAuthToken(localStorage.getItem('token'));
 		}
 	};
 

@@ -7,11 +7,13 @@ const health_controller_1 = __importDefault(require("./controllers/health.contro
 const user_controller_1 = __importDefault(require("./controllers/user.controller"));
 const doctor_controller_1 = __importDefault(require("./controllers/doctor.controller"));
 const hospital_controller_1 = __importDefault(require("./controllers/hospital.controller"));
+const auth_controller_1 = __importDefault(require("./controllers/auth.controller"));
 const routes = (app) => {
     app.use('/v1/health', health_controller_1.default);
     app.use('/v1/user', user_controller_1.default);
     app.use('/v1/doctor', doctor_controller_1.default);
     app.use('/v1/hospital', hospital_controller_1.default);
+    app.use('/v1/auth', auth_controller_1.default);
 };
 exports.default = routes;
 //# sourceMappingURL=routes.js.map

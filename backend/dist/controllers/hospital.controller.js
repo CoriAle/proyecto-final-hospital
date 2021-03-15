@@ -14,14 +14,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const error_1 = require("../error");
+const auth_midd_1 = __importDefault(require("../middlewares/auth/auth.midd"));
 const hospital_1 = __importDefault(require("../models/hospital"));
 const post_validator_1 = __importDefault(require("../middlewares/validators/hospital/post.validator"));
 const put_validator_1 = __importDefault(require("../middlewares/validators/hospital/put.validator"));
 const validator_1 = __importDefault(require("../middlewares/validator"));
 const router = express_1.Router();
-router.post('/', 
-//auth_token, 
-post_validator_1.default, validator_1.default, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.post('/', auth_midd_1.default, post_validator_1.default, validator_1.default, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { name, phone, adress, } = req.body;
         const newHospital = new hospital_1.default({
@@ -41,9 +40,7 @@ post_validator_1.default, validator_1.default, (req, res) => __awaiter(void 0, v
         error_1.handleError(custom, req, res);
     }
 }));
-router.put('/:id', 
-//auth_token, 
-put_validator_1.default, validator_1.default, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.put('/:id', auth_midd_1.default, put_validator_1.default, validator_1.default, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { name, phone, adress, } = req.body;
         const hospitalFields = {};
@@ -70,9 +67,7 @@ put_validator_1.default, validator_1.default, (req, res) => __awaiter(void 0, vo
         error_1.handleError(custom, req, res);
     }
 }));
-router.get('/', 
-// auth_token,
-(req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.get('/', auth_midd_1.default, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const hospitals = yield hospital_1.default.find({}).sort('-createdAt');
         return res.status(200).json({
@@ -86,9 +81,7 @@ router.get('/',
         error_1.handleError(custom, req, res);
     }
 }));
-router.delete('/:id', 
-// auth_token,
-(req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.delete('/:id', auth_midd_1.default, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const id = req.params.id;
         const hospital = yield hospital_1.default.findById(id);
