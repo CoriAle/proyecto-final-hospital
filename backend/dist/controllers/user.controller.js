@@ -38,7 +38,7 @@ router.post('/', auth_validator_1.default, validator_1.default, (req, res) => __
         user.password = yield bcryptjs_1.default.hash(password, salt);
         yield user.save();
         const payload = {
-            use: {
+            user: {
                 id: user.id,
             },
         };

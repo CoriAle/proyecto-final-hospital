@@ -36,7 +36,7 @@ const AuthState = (props: PropsWithChildren<any>) => {
       const res = await g_instance.get('/v1/auth');
       dispatch({
         type: USER_LOADED,
-        payload: res.data,
+        payload: res.data.data,
       });
     } catch (err) {
       dispatch({

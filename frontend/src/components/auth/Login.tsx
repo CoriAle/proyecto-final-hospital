@@ -16,7 +16,7 @@ const Login = (props:any) => {
 			props.history.push('/');
 		}
 
-		if(error === 'Invalid Credentials') {
+		if(error === 'Invalid User') {
 			setAlert(error, 'danger', 5000);
 			clearErrors();
 		}
@@ -71,7 +71,7 @@ const Login = (props:any) => {
 					    value={password}
 					    onChange={onChange}
 				       />
-				      <button className="btn btn-theme btn-block" type="submit"><i className="fa fa-lock"></i> SIGN IN</button>
+				      <button className="btn btn-theme btn-block mt" type="submit"><i className="fa fa-lock"></i> SIGN IN</button>
 				      <hr/>
 				      <div className="registration">
 				          Don't have an account yet?<br />

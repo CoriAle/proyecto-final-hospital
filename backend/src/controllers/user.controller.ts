@@ -37,7 +37,7 @@ router.post(
 			await user.save();
 
 			const payload = {
-				use: {
+				user: {
 					id: user.id,
 				},
 			};

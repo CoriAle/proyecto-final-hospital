@@ -30,19 +30,17 @@ function App() {
             <Router>
               <Fragment>
                 <Navbar />
-               <section id="main-content">
-                  <section className="wrapper site-min-height">
+                 <Fragment>
+                    <Alerts />
                     <Switch>
                       <PrivateRoute exact path='/' component={Hospital} />
-                      <Route exact path='/' component={Hospital}/>
-                      <Route exact path='/about' component={About}/>
-                      <Route exact path='/hospital' component={Hospital}/>
-                      <Route exact path='/doctor' component={Doctor}/>
+                      <PrivateRoute exact path='/doctor' component={Doctor} />
+                      <PrivateRoute exact path='/hospital' component={Hospital} />
+                      <PrivateRoute exact path='/about' component={About} />
                       <Route exact path='/login' component={Login} />
                       <Route exact path='/register' component={Register} />
                     </Switch>
-                  </section>
-                </section>
+                  </Fragment>
               </Fragment>
             </Router>
           </DoctorState>

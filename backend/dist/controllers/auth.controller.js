@@ -56,12 +56,20 @@ router.post('/', auth_validator_1.default, validator_1.default, (req, res) => __
     }
 }));
 router.get('/', auth_midd_1.default, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
     try {
-        const user = yield req.user;
-        return res.status(201).json({
-            data: user,
-            msj: 'User info!',
-        });
+        const userId = yield ((_a = req.user) === null || _a === void 0 ? void 0 : _a.id);
+        if (userId) {
+            const user = yield user_1.default.findById(userId, 'name email');
+            return res.status(201).json({
+                data: user,
+                msj: 'User info!',
+            });
+        }
+        else {
+            const custom = new error_1.ErrorHandler(403, 'Not authenticated');
+            error_1.handleError(custom, req, res);
+        }
     }
     catch (err) {
         const custom = new error_1.ErrorHandler(500, 'Server Error.' + err._message);

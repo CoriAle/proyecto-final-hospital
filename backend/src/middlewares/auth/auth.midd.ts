@@ -14,6 +14,7 @@ const auth_token = (req:Request, res:Response, next:NextFunction) => {
 
 	try {
 		const decoded: any = jwt.decode(token, config.get('jwt_secret'));
+
 		req.user = decoded.user;
 		next();
 	} catch (err) {

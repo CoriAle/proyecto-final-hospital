@@ -53,3 +53,11 @@
 .filter-margin {
   margin: 20px;
 }
+
+.text-white {
+  color: #fff;
+}
+
+.form-register {
+  max-width: 500px;
+}

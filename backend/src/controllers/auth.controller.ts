@@ -52,12 +52,19 @@ router.post('/', bodyValidatior, validationsHandler, async(req:Request, res: Res
 
 router.get('/', auth_token, async(req:Request, res: Response)=> { 
 	try {
-		const user = await req.user;
+		const userId = await req.user?.id;
 
-		return res.status(201).json({
-			data: user,
-			msj: 'User info!',
-		});
+		if (userId) {
+			const user = await User.findById(userId, 'name email');
+
+			return res.status(201).json({
+				data: user,
+				msj: 'User info!',
+			});
+		} else {
+			const custom = new ErrorHandler(403, 'Not authenticated');
+	    	handleError(custom, req, res);
+		}
 
 	} catch(err) {
 		const custom = new ErrorHandler(500, 'Server Error.' + err._message );

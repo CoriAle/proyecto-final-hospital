@@ -18,7 +18,11 @@ const PrivateRoute = ({ component, ...rest }: any) => {
           !isAuthenticated && !loading ? (
             <Redirect to='/login' />
           ) : (
-            <Route {...props} component={component} render={undefined} />
+            <section id="main-content">
+              <section className="wrapper site-min-height">
+                <Route {...props} component={component} render={undefined} />
+              </section>
+            </section>
           )
         }
       />
