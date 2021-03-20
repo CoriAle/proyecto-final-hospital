@@ -68,6 +68,7 @@ router.put(
 			if(!hospital) {
 				const custom = new ErrorHandler(404, 'Hospital not found.');
 	    		handleError(custom, req, res);
+	    		return;
 	    	}
 
 
@@ -118,9 +119,11 @@ router.delete(
 		try {
 			const id = req.params.id;
 			const hospital = await Hospital.findById(id);
+
 			if(!hospital) {
 				const custom = new ErrorHandler(404, 'Hospital not found.');
 	    		handleError(custom, req, res);
+	    		return;
 	    	}
 
 	    	await Hospital.findByIdAndRemove(id);

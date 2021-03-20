@@ -80,6 +80,7 @@ router.put(
 			if(!doctor) {
 				const custom = new ErrorHandler(404, 'Doctor not found.');
 	    		handleError(custom, req, res);
+	    		return;
 	    	}
 
 			 doctor = await Doctor.findByIdAndUpdate(
@@ -132,6 +133,7 @@ router.delete(
 			if(!doctor) {
 				const custom = new ErrorHandler(404, 'Doctor not found.');
 	    		handleError(custom, req, res);
+	    		return;
 	    	}
 
 	    	await Doctor.findByIdAndRemove(id);
