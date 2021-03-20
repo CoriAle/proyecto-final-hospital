@@ -4,7 +4,13 @@ import { Hospital } from '../../models/hospital/hospital.model';
 
 const HospitalForm = () => {
 	const hospitalContext = useContext(HospitalContext);
-	const { addHospital, clearCurrent, updateHospital, current } = hospitalContext;
+	const { addHospital,
+			clearCurrent,
+			updateHospital,
+			current,
+			error,
+			loading 
+		} = hospitalContext;
 	
 	useEffect(() => {
 			if(current !== null) {
@@ -17,6 +23,7 @@ const HospitalForm = () => {
 				} as Hospital);
 		};
 	}, [hospitalContext, current]);
+
 
 	const [hospital, setHospital] = useState({
 		name: '',
@@ -98,8 +105,19 @@ const HospitalForm = () => {
 		    	</div>
 				</div>
 		    <div className="text-right mt">
-		    	<button type="submit" className="btn btn-theme mx">Submit</button>
-		    	<button className="btn btn-theme02 mx" onClick={clearAll}>Clear</button>
+		    	<button
+		    		type="submit"
+		    		className="btn btn-theme mx"
+		    		disabled={!!loading}>
+		    		Submit
+		    	</button>
+		    	<button 
+		    		className="btn btn-theme02 mx"
+		    		onClick={clearAll}
+		    		type="button"
+		    	>
+		    		Clear
+		    	</button>
 				</div>
 			</form>
 		</div>

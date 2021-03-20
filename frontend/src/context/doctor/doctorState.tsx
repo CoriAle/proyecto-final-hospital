@@ -41,7 +41,7 @@ const DoctorState = (props: PropsWithChildren<any>) => {
 			const res = await g_instance.get('/v1/doctor');
 			dispatch({ type: GET_DOCTORS, payload: res.data });
 		} catch (err) {
-			dispatch({ type: DOCTOR_ERROR, payload: err.response.msg });
+			dispatch({ type: DOCTOR_ERROR, payload: err.response.data.message });
 		}
 	};
 
@@ -52,7 +52,7 @@ const DoctorState = (props: PropsWithChildren<any>) => {
 			const res = await g_instance.post('/v1/doctor', doctor);
 			dispatch({ type: ADD_DOCTOR, payload: res.data });
 		} catch (err) {
-			dispatch({ type: DOCTOR_ERROR, payload: err.response.msg });
+			dispatch({ type: DOCTOR_ERROR, payload: err.response.data.message });
 		}
 	};
 
@@ -63,7 +63,7 @@ const DoctorState = (props: PropsWithChildren<any>) => {
 			//const res = await g_instance.delete(`/v1/doctor/${id}`);
 			dispatch({ type: DELETE_DOCTOR, payload: id });
 		} catch (err) {
-			dispatch({ type: DOCTOR_ERROR, payload: err.response.msg });
+			dispatch({ type: DOCTOR_ERROR, payload: err.response.data.message });
 		}
 	};
 
@@ -74,7 +74,7 @@ const DoctorState = (props: PropsWithChildren<any>) => {
 			const res = await g_instance.put(`/v1/doctor/${doctor._id}`, doctor);
 			dispatch({ type: UPDATE_DOCTOR, payload: res.data });
 		} catch (err) {
-			dispatch({ type: DOCTOR_ERROR, payload: err.response.msg });
+			dispatch({ type: DOCTOR_ERROR, payload: err.response.data.message });
 		}
 	};
 

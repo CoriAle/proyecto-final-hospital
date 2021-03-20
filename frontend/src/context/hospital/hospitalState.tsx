@@ -41,7 +41,7 @@ const HospitalState = (props: PropsWithChildren<any>) => {
 			const res = await g_instance.get('/v1/hospital');
 			dispatch({ type: GET_HOSPITALS, payload: res.data });
 		} catch (err) {
-			dispatch({ type: HOSPITAL_ERROR, payload: err.response.msg });
+			dispatch({ type: HOSPITAL_ERROR, payload: err.response.data.message });
 		}
 	};
 
@@ -52,7 +52,7 @@ const HospitalState = (props: PropsWithChildren<any>) => {
 			const res = await g_instance.post('/v1/hospital', hospital);
 			dispatch({ type: ADD_HOSPITAL, payload: res.data });
 		} catch (err) {
-			dispatch({ type: HOSPITAL_ERROR, payload: err.response.msg });
+			dispatch({ type: HOSPITAL_ERROR, payload: err.response.data.message });
 		}
 	};
 
@@ -63,7 +63,7 @@ const HospitalState = (props: PropsWithChildren<any>) => {
 			//const res = await g_instance.delete(`/v1/hospital/${id}`);
 			dispatch({ type: DELETE_HOSPITAL, payload: id });
 		} catch (err) {
-			dispatch({ type: HOSPITAL_ERROR, payload: err.response.msg });
+			dispatch({ type: HOSPITAL_ERROR, payload: err.response.data.message });
 		}
 	};
 
@@ -74,7 +74,7 @@ const HospitalState = (props: PropsWithChildren<any>) => {
 			const res = await g_instance.put(`/v1/hospital/${hospital._id}`, hospital);
 			dispatch({ type: UPDATE_HOSPITAL, payload: res.data });
 		} catch (err) {
-			dispatch({ type: HOSPITAL_ERROR, payload: err.response.msg });
+			dispatch({ type: HOSPITAL_ERROR, payload: err.response.data.message });
 		}
 	};
 

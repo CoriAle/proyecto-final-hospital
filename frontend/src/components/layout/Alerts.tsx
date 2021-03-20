@@ -7,9 +7,11 @@ const Alerts = () => {
   return (
     alertContext.alerts.length > 0 &&
     alertContext.alerts.map((alert: any) => (
-      <div key={alert.id} className={`alert alert-${alert.type}`}>
-        <i className='fa fa-info-circle' /> {alert.msg}
-      </div>
+    	<div className="alert-container">
+	      <div key={alert.id} className={`alert alert-${alert.type}`}>
+	        <i className='fa fa-info-circle' /> {alert.msg}
+	      </div>
+    	</div>
     ))
   );
 };

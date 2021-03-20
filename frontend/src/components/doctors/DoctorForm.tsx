@@ -177,7 +177,13 @@ const DoctorForm = () => {
 				
 			  <div className="text-right mt">
 			    	<button type="submit" className="btn btn-theme mx">Submit</button>
-			    	<button className="btn btn-theme02 mx" onClick={clearAll}>Clear</button>
+			    	<button
+			    		type="button"
+			    		className="btn btn-theme02 mx"
+			    		onClick={clearAll}
+			    	>
+			    		Clear
+			    	</button>
 				</div>
 			</form>
 		</div>

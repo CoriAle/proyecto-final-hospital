@@ -54,6 +54,7 @@ router.put('/:id', auth_midd_1.default, put_validator_1.default, validator_1.def
         if (!hospital) {
             const custom = new error_1.ErrorHandler(404, 'Hospital not found.');
             error_1.handleError(custom, req, res);
+            return;
         }
         hospital = yield hospital_1.default.findByIdAndUpdate(req.params.id, { $set: hospitalFields }, { new: true });
         return res.status(200).json({
@@ -88,6 +89,7 @@ router.delete('/:id', auth_midd_1.default, (req, res) => __awaiter(void 0, void 
         if (!hospital) {
             const custom = new error_1.ErrorHandler(404, 'Hospital not found.');
             error_1.handleError(custom, req, res);
+            return;
         }
         yield hospital_1.default.findByIdAndRemove(id);
         return res.status(200).json({
