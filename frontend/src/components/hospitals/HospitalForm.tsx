@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react'
 import HospitalContext from '../../context/hospital/hospitalContext';
 import { Hospital } from '../../models/hospital/hospital.model';
-import PropTypes from 'prop-types'
 
 const HospitalForm = () => {
 	const hospitalContext = useContext(HospitalContext);

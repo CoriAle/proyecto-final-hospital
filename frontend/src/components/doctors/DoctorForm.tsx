@@ -3,7 +3,6 @@ import MultiSelect from "react-multi-select-component";
 import DoctorContext from '../../context/doctor/doctorContext';
 import HospitalContext from '../../context/hospital/hospitalContext';
 import { Doctor } from '../../models/doctor/doctor.model';
-import PropTypes from 'prop-types'
 
 const DoctorForm = () => {
 	const doctorContext = useContext(DoctorContext);

@@ -72,7 +72,6 @@ const AuthState = (props: PropsWithChildren<any>) => {
         'Content-Type': 'application/json',
       },
     };
-    console.log(formData, "Form data");
     try {
       const res = await g_instance.post('/v1/auth', formData, config);
       dispatch({

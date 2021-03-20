@@ -75,7 +75,7 @@ const doctorReducer = (state: Doctors_State, action:any) => {
 				),
 				loading: false,
 			};
-		case CLEAR_CURRENT_DOCTOR	:
+		case CLEAR_FILTER_DOCTOR	:
 			return {
 				...state,
 				filtered: null,

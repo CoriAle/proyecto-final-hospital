@@ -2,7 +2,6 @@ import React, { Fragment,useContext, useEffect } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import Spinner from '../layout/Spinner';
 import HospitalContext from '../../context/hospital/hospitalContext';
-import PropTypes from 'prop-types';
 import HospitalItem from  './HospitalItem';
 import HospitalFilter from './HospitalFilter';
 
@@ -63,7 +62,5 @@ const Hospitals = () => {
 		</Fragment>
 	)
 }
-
-
 
 export default Hospitals

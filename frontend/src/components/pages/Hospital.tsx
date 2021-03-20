@@ -1,5 +1,4 @@
 import React, { useContext, useEffect } from 'react'
-import PropTypes from 'prop-types'
 import Hospitals from '../hospitals/Hospitals';
 import HospitalForm from '../hospitals/HospitalForm';
 import AuthContext from '../../context/auth/authContext';

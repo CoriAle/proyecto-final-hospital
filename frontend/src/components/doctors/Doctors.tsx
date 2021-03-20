@@ -2,7 +2,6 @@ import React, { Fragment,useContext, useEffect } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import Spinner from '../layout/Spinner';
 import DoctorContext from '../../context/doctor/doctorContext';
-import PropTypes from 'prop-types';
 import DoctorItem from  './DoctorItem';
 import DoctorFilter from './DoctorFilter';
 
@@ -66,7 +65,5 @@ const Doctors = () => {
 		</Fragment>
 	)
 }
-
-
 
 export default Doctors

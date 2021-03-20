@@ -75,7 +75,7 @@ const hospitalReducer = (state: Hospitals_State, action:any) => {
 				),
 				loading: false,
 			};
-		case CLEAR_CURRENT	:
+		case CLEAR_FILTER	:
 			return {
 				...state,
 				filtered: null,

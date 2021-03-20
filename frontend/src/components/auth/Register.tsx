@@ -1,5 +1,4 @@
-import React, { useState, useContext, useEffect, useRef } from 'react'
-import PropTypes from 'prop-types'
+import React, { useContext, useEffect, useRef } from 'react'
 import AuthContext from '../../context/auth/authContext';
 import AlertContext from '../../context/alert/alertContext';
 import { Link } from "react-router-dom";
@@ -13,18 +12,18 @@ const Register = (props:any) => {
 	const password = useRef() as React.RefObject<HTMLInputElement>;
 
 	const { setAlert } = alertContext;
-	const { login, error, clearErrors, isAuthenticated } = authContext;
+	const { error, clearErrors, isAuthenticated } = authContext;
 
 	useEffect(() => {
 		if (isAuthenticated) {
 			props.history.push('/');
 		}
 
-		if(error === 'Invalid User') {
+		if(error) {
 			setAlert(error, 'danger', 5000);
 			clearErrors();
 		}
-	}, [error, isAuthenticated, props.history]);
+	}, [error, isAuthenticated, props.history, setAlert, clearErrors]);
 
 	
 	const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -98,9 +97,7 @@ const Register = (props:any) => {
 					      <div className="registration">
 					          - Or -<br />
 					          <Link to="/login">
-						          <a className="" href="#">
-						             Sign In
-						          </a>
+						            Sign In
 					          </Link>
 					      </div>
 					</form>

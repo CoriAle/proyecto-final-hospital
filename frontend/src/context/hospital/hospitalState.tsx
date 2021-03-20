@@ -60,7 +60,7 @@ const HospitalState = (props: PropsWithChildren<any>) => {
 		checkAuthToken();
 
 		try {
-			const res = await g_instance.delete(`/v1/hospital/${id}`);
+			//const res = await g_instance.delete(`/v1/hospital/${id}`);
 			dispatch({ type: DELETE_HOSPITAL, payload: id });
 		} catch (err) {
 			dispatch({ type: HOSPITAL_ERROR, payload: err.response.msg });

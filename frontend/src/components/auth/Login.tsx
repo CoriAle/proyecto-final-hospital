@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect }from 'react'
-import PropTypes from 'prop-types'
 import { Link } from "react-router-dom";
 import AlertContext from '../../context/alert/alertContext';
 import AuthContext from '../../context/auth/authContext';
@@ -16,11 +15,11 @@ const Login = (props:any) => {
 			props.history.push('/');
 		}
 
-		if(error === 'Invalid User') {
+		if(error) {
 			setAlert(error, 'danger', 5000);
 			clearErrors();
 		}
-	}, [error, isAuthenticated, props.history]);
+	}, [error, isAuthenticated, props.history, setAlert, clearErrors]);
 
 	const [user, setUser] = useState({
 		email: '',
@@ -30,12 +29,9 @@ const Login = (props:any) => {
 
 
 	const onChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-	{	console.log(e.target.name)
 		setUser({...user, [e.target.name]: e.target.value });
-	}
 
 	const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-		console.log("Aca")
 		e.preventDefault();
 		    if (email === '' || password === '') {
 		      setAlert('Please fill in all fields', 'danger', 5000);
@@ -76,9 +72,7 @@ const Login = (props:any) => {
 				      <div className="registration">
 				          Don't have an account yet?<br />
 				          <Link to="/register">
-					          <a className="" href="#">
 					              Create an account
-					          </a>
 				          </Link>
 				      </div>
 				  </div>

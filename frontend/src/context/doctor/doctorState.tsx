@@ -60,7 +60,7 @@ const DoctorState = (props: PropsWithChildren<any>) => {
 		checkAuthToken();
 
 		try {
-			const res = await g_instance.delete(`/v1/doctor/${id}`);
+			//const res = await g_instance.delete(`/v1/doctor/${id}`);
 			dispatch({ type: DELETE_DOCTOR, payload: id });
 		} catch (err) {
 			dispatch({ type: DOCTOR_ERROR, payload: err.response.msg });

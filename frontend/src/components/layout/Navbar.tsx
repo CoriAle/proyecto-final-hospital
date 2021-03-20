@@ -1,5 +1,4 @@
-import React, { useContext, Fragment} from 'react'
-import PropTypes from 'prop-types'
+import React, { useContext } from 'react'
 import { NavLink } from "react-router-dom";
 import AuthContext from '../../context/auth/authContext';
 
